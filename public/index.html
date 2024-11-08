@@ -1,0 +1,39 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no">
+  <title>3D Model with Enhanced Lighting</title>
+
+  <!-- Подключение шрифта Jaldi Bold -->
+  <link href="https://fonts.googleapis.com/css2?family=Jaldi:wght@700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/c37f173b57.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div class="preloader">
+    <p>Loading...</p>
+    <div class="progress-bar">
+      <div class="progress" id="progress-bar"></div>
+    </div>
+  </div>
+
+  <div class="centered-text">TRY THE POWER OF AI</div>
+  <div class="button-container">
+    <div class="block">
+      <button class="button" onclick="window.location.href='https://example.com/neurochat'">
+        <i class="fab fa-telegram-plane" style="font-size: 20px;"></i> NEUROCHAT
+      </button>
+    </div>
+    <div class="block">
+      <button class="button" onclick="window.location.href='https://example.com/photo-generations'">
+        <i class="fab fa-telegram-plane" style="font-size: 20px;"></i> PHOTO GENERATIONS
+      </button>
+    </div>
+  </div>
+</body>
+
+<!-- Three.js Scripts and Scene -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+<script src="/assets/js/main.js"></script>

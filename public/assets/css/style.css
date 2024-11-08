@@ -1,0 +1,155 @@
+    /* Обновленный CSS */
+    body {
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      position: relative;
+      background-color: #C4C0A5;
+      font-family: 'Jaldi', sans-serif;
+      z-index: 9999;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Preloader Style */
+    .preloader {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      /* Black background */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      /* Make sure it covers everything */
+      flex-direction: column;
+      /* Stack the children vertically */
+    }
+
+    .preloader .progress-bar {
+      width: 80%;
+      max-width: 300px;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .preloader .progress-bar .progress {
+      height: 100%;
+      width: 0;
+      background-color: #FC9A30;
+      border-radius: 10px;
+      transition: width 0.5s ease-in-out;
+    }
+
+    .preloader p {
+      font-size: 18px;
+      color: #fff;
+      margin-top: 20px;
+      /* Adds space between the progress bar and the text */
+    }
+
+    /* Rest of your styles */
+    .centered-text {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      color: #fff;
+      font-family: 'Jaldi', sans-serif;
+      font-weight: bold;
+      z-index: 10;
+      text-align: center;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 100px;
+      box-sizing: border-box;
+      z-index: 10;
+    }
+
+    .block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .button {
+      background-color: #FC9A30;
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 50px;
+      font-size: 24px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: 'Jaldi', sans-serif;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #e88b2b;
+    }
+
+    /* Mobile Styles */
+    @media only screen and (max-width: 1410px) {
+      .centered-text {
+        font-size: 35px;
+        top: 15%;
+      }
+
+      .button-container {
+        flex-direction: column;
+        bottom: 20px;
+        top: auto;
+        padding: 0 20px;
+        width: 100%;
+        transform: translateY(0);
+      }
+
+      .button {
+        font-size: 16px;
+        padding: 10px 20px;
+        margin: 5px 20px;
+      }
+    }
+
+    /* Еще одно исправление для экрана */
+    @media (max-width: 767px) {
+
+      body,
+      html {
+        height: 100%;
+      }
+
+      .button-container {
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+      }
+    }
