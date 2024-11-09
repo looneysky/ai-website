@@ -1,28 +1,34 @@
 let scene, camera, renderer, model, mixer, group;
 let mouseX = 0, mouseY = 0;
 let progress = 0;
-let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-function init() {
+async function init() {
   scene = new THREE.Scene();
 
-  // Создаем загрузчик с использованием менеджера загрузки
+  // Create a loading manager to track loading progress
   const loadingManager = new THREE.LoadingManager();
-
-  loadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
-    progress = (itemsLoaded / itemsTotal) * 100;
-    document.getElementById('progress-bar').style.width = `${progress}%`;
+  
+  loadingManager.onStart = function (url, itemsLoaded, itemsTotal) {
+    console.log('Started loading', url, itemsLoaded, itemsTotal);
   };
 
-  loadingManager.onLoad = function () {
-    document.querySelector('.preloader').style.display = 'none';
-    animate();
+  loadingManager.onProgress = function (url, itemsLoaded, itemsTotal) {
+    // Update progress bar based on loaded assets
+    progress = (itemsLoaded / itemsTotal) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+  };
+
+  loadingManager.onLoad = async function () {
+    // Once everything is loaded, hide the preloader
+    await checkModelLoaded();
+    console.log('All assets loaded!');
   };
 
   loadingManager.onError = function (url) {
-    console.error(`Ошибка загрузки: ${url}`);
+    console.error('Error loading', url);
   };
 
+  // Load background image
   const textureLoader = new THREE.TextureLoader(loadingManager);
   textureLoader.load('/assets/models/SUB_Math_01_0.jpg', (texture) => {
     scene.background = texture;
@@ -38,52 +44,69 @@ function init() {
   renderer.setPixelRatio(window.devicePixelRatio);
   document.body.appendChild(renderer.domElement);
 
+  // Add lighting
   const ambientLight = new THREE.AmbientLight(0xFFFFFF, 0.8);
   scene.add(ambientLight);
 
   const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 5);
   directionalLight.position.set(5, 5, 5);
   directionalLight.castShadow = true;
-  directionalLight.shadow.mapSize.width = 1024;
-  directionalLight.shadow.mapSize.height = 1024;
+  directionalLight.shadow.mapSize.width = 2048;
+  directionalLight.shadow.mapSize.height = 2048;
   scene.add(directionalLight);
 
-  const wall = new THREE.Mesh(
-    new THREE.PlaneGeometry(100, 100),
-    new THREE.ShadowMaterial({ opacity: 0.3 })
-  );
+  const pointLight = new THREE.PointLight(0xFFFFFF, 1.5, 10);
+  pointLight.position.set(0, 1, 2);
+  scene.add(pointLight);
+
+  // Shadow plane
+  const wallGeometry = new THREE.PlaneGeometry(100, 100);
+  const wallMaterial = new THREE.ShadowMaterial({ opacity: 0.3 });
+  const wall = new THREE.Mesh(wallGeometry, wallMaterial);
   wall.rotation.x = -Math.PI / 2;
   wall.position.y = -0.8;
   wall.receiveShadow = true;
   scene.add(wall);
 
-  const overlay = new THREE.Mesh(
-    new THREE.PlaneGeometry(100, 100),
-    new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0.5, transparent: true })
-  );
+  // Semi-transparent overlay
+  const overlayGeometry = new THREE.PlaneGeometry(100, 100);
+  const overlayMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, opacity: 0.8, transparent: true });
+  const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial);
   overlay.position.z = -10;
   scene.add(overlay);
 
+  // Load 3D model using loadingManager
   const loader = new THREE.GLTFLoader(loadingManager);
-  loader.load('/assets/models/scene (5).glb', (gltf) => {
+  await loader.loadAsync('/assets/models/scene (5).glb').then((gltf) => {
     model = gltf.scene;
     model.position.set(0, -1.3, 0);
     model.scale.set(1, 1, 1);
     model.castShadow = true;
+    model.receiveShadow = true;
     scene.add(model);
 
     model.traverse((object) => {
       if (object.isMesh) {
         object.castShadow = true;
         object.receiveShadow = true;
-        object.material = new THREE.MeshStandardMaterial({
-          map: object.material.map,
-          normalMap: object.material.normalMap,
-          roughness: 0.4,
-          metalness: 0.5,
-          emissive: 0x111111,
-          emissiveIntensity: 0.1
-        });
+        if (object.material.map) {
+          object.material = new THREE.MeshStandardMaterial({
+            map: object.material.map,
+            normalMap: object.material.normalMap,
+            roughness: 0.0,
+            metalness: 0.5,
+            emissive: 0xFFFFFF,
+            emissiveIntensity: 0.1
+          });
+        } else {
+          object.material = new THREE.MeshStandardMaterial({
+            color: 0xD3D3D3,
+            roughness: 0.2,
+            metalness: 0.3,
+            emissive: 0xFFFFFF,
+            emissiveIntensity: 0.1
+          });
+        }
       }
       if (object.name === 'Group') {
         group = object;
@@ -95,17 +118,27 @@ function init() {
     gltf.animations.forEach((clip) => {
       mixer.clipAction(clip).play();
     });
-  }, undefined, (error) => {
-    console.error('Ошибка при загрузке модели:', error);
+  }).catch((error) => {
+    console.error('Error loading model:', error);
   });
 
   window.addEventListener('resize', onWindowResize);
+  window.addEventListener('mousemove', onMouseMove);
+  window.addEventListener('touchstart', onTouchStart);
+  window.addEventListener('touchmove', onTouchMove);
+  window.addEventListener('touchend', onTouchEnd);
 
-  if (isTouchDevice) {
-    window.addEventListener('touchstart', onTouchStart);
-    window.addEventListener('touchmove', onTouchMove);
+  animate();
+}
+
+// Asynchronous check for model load completion
+async function checkModelLoaded() {
+  if (model) {
+    // Hide the preloader once the model is fully loaded
+    document.querySelector('.preloader').style.display = 'none';
   } else {
-    window.addEventListener('mousemove', onMouseMove);
+    // Wait for the model to be loaded before hiding preloader
+    setTimeout(checkModelLoaded, 100);
   }
 }
 
@@ -121,23 +154,26 @@ function onMouseMove(event) {
 }
 
 function onTouchStart(event) {
-  if (event.touches.length === 1) {
-    event.preventDefault();
-    mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-    mouseY = (event.touches[0].clientY / window.innerHeight) * 2 - 1;
-  }
+  event.preventDefault();
+  const touch = event.touches[0];
+  mouseX = (touch.clientX / window.innerWidth) * 2 - 1;
+  mouseY = (touch.clientY / window.innerHeight) * 2 - 1;
 }
 
 function onTouchMove(event) {
-  if (event.touches.length === 1) {
-    event.preventDefault();
-    mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-    mouseY = (event.touches[0].clientY / window.innerHeight) * 2 - 1;
-  }
+  event.preventDefault();
+  const touch = event.touches[0];
+  mouseX = (touch.clientX / window.innerWidth) * 2 - 1;
+  mouseY = (touch.clientY / window.innerHeight) * 2 - 1;
+}
+
+function onTouchEnd(event) {
+  // Optional: reset or do something when touch ends
 }
 
 function animate() {
   requestAnimationFrame(animate);
+
   if (mixer) mixer.update(0.01);
 
   if (group) {
@@ -151,5 +187,4 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-// Инициализируем приложение
 init();
