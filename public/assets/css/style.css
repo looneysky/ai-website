@@ -116,7 +116,7 @@
     @media only screen and (max-width: 1410px) {
       .centered-text {
         line-height: 1.1; /* Adjust this value as needed */
-        font-size: 40px;
+        font-size: 35px;
         top: 15%;
       }
 
