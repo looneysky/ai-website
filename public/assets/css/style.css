@@ -115,7 +115,8 @@
     /* Mobile Styles */
     @media only screen and (max-width: 1410px) {
       .centered-text {
-        font-size: 35px;
+        line-height: 1.1; /* Adjust this value as needed */
+        font-size: 40px;
         top: 15%;
       }
 
@@ -153,3 +154,28 @@
         box-sizing: border-box;
       }
     }
+
+    /* Footer Style */
+.footer {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px; /* Space between links */
+  z-index: 10;
+}
+
+/* Footer Link Style */
+.footer-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: 'Jaldi', sans-serif;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.footer-link:hover {
+  color: #e88b2b; /* Slightly darker on hover */
+}
