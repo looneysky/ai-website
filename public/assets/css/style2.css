@@ -1,0 +1,122 @@
+body {
+    background: url('/assets/models/SUB_Math_01_0.jpg') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Jaldi', sans-serif;
+    color: #fff;
+    overflow: hidden;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* 50% transparency */
+}
+
+.centered-text {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 80px;
+    font-weight: bold;
+    text-align: center;
+    z-index: 10;
+    text-transform: uppercase;
+    max-width: calc(100% - 40px);
+    /* Ensures text stays 20px away from edges */
+    white-space: nowrap;
+    /* Prevents wrapping */
+    overflow: hidden;
+    /* Ensures text is hidden if it overflows */
+    text-overflow: ellipsis;
+    /* Adds ellipsis when text overflows */
+}
+
+.button-container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button {
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 12px 50px;
+    font-size: 24px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: #d6d0cc;
+}
+
+/* Footer Styles */
+.footer {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    /* Space between links */
+    z-index: 10;
+    flex-wrap: nowrap;
+    /* Prevent the links from wrapping */
+}
+
+/* Footer Link Styles */
+.footer-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Jaldi', sans-serif;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.footer-link:hover {
+    color: #e88b2b;
+    /* Slightly darker on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .centered-text {
+        font-size: 35px;
+        max-width: calc(100% - 40px);
+        /* 20px margin from both sides on mobile */
+    }
+
+    .button {
+        font-size: 18px;
+        padding: 10px 30px;
+    }
+
+    .footer {
+        flex-direction: row;
+        /* Keep the links in a row on mobile */
+        gap: 10px;
+        /* Reduce space between links */
+    }
+}

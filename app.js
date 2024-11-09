@@ -12,6 +12,11 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Обрабатываем запрос на корневой маршрут и отправляем index.html
+app.get('/start', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'start.html'));
+});
+
 // Запускаем сервер
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
