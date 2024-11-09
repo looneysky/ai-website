@@ -54,22 +54,46 @@
     </div>
   </div>
 
-  <div class="centered-text">TRY THE POWER OF AI</div>
-  <div class="button-container">
-    <div class="block">
-      <button class="button" onclick="window.location.href='https://example.com/neurochat'">
-        <i class="fab fa-telegram-plane" style="font-size: 20px;"></i> NEUROCHAT
-      </button>
-    </div>
-    <div class="block">
-      <button class="button" onclick="window.location.href='https://example.com/photo-generations'">
-        <i class="fab fa-telegram-plane" style="font-size: 20px;"></i> PHOTO GENERATIONS
-      </button>
+  <!-- Actual Content (Hidden Initially) -->
+  <div id="page-content" style="display:none;">
+    <div class="centered-text">TRY THE POWER OF AI</div>
+    <div class="button-container">
+      <div class="block">
+        <button class="button" onclick="window.location.href='https://example.com/neurochat'">
+          <i class="fab fa-telegram-plane" style="font-size: 20px;"></i> NEUROCHAT
+        </button>
+      </div>
+      <div class="block">
+        <button class="button" onclick="window.location.href='https://example.com/photo-generations'">
+          <i class="fab fa-telegram-plane" style="font-size: 20px;"></i> PHOTO GENERATIONS
+        </button>
+      </div>
     </div>
   </div>
-</body>
 
-<!-- Three.js Scripts and Scene -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="/assets/js/main.js?v=2"></script>
+  <!-- Three.js Scripts and Scene -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="/assets/js/main.js?v=2"></script>
+
+  <script>
+    window.addEventListener('load', function () {
+      // Delay the display of the actual content
+      setTimeout(function () {
+        // Hide preloader and show the content
+        document.querySelector('.preloader').style.display = 'none';
+        document.getElementById('page-content').style.display = 'block'; // Show content
+      }, 3000); // Fake delay for 3 seconds
+
+      // Simulate loading progress (optional, can be customized)
+      let progress = 0;
+      const fakeLoading = setInterval(() => {
+        progress += 10;
+        if (progress >= 100) {
+          clearInterval(fakeLoading);
+        }
+        document.getElementById('progress-bar').style.width = progress + '%';
+      }, 500); // Simulating loading steps every 0.5 second
+    });
+  </script>
+</body>
