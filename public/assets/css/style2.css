@@ -40,13 +40,13 @@ body {
     overflow: hidden;
     /* Ensures text is hidden if it overflows */
     text-overflow: ellipsis;
+    padding-block-end: 25px;
     /* Adds ellipsis when text overflows */
 }
 
 .button-container {
     position: absolute;
     left: 50%;
-    margin-top: 20px;
     transform: translate(-50%, -50%);
     z-index: 10;
     display: flex;
@@ -112,10 +112,6 @@ body {
     .button {
         font-size: 18px;
         padding: 10px 30px;
-    }
-
-    .button-container {
-        margin-top: 15px;
     }
 
     .footer {
