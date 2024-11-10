@@ -14,13 +14,17 @@ app.set('views', path.join(__dirname, 'public', 'views'));  // Указывае�
 app.get('/', (req, res) => {
   res.render('index', {
     title: process.env.SITE_TITLE,
-    description: process.env.SITE_DESCRIPTION,
-    keywords: process.env.SITE_KEYWORDS,
+    description: process.env.META_DESCRIPTION,
+    keywords: process.env.META_KEYWORDS,
     url: process.env.SITE_URL,
-    image: process.env.SITE_IMAGE,
+    image: process.env.OG_IMAGE,
+    twitter_image: process.env.TWITTER_IMAGE,
+    favicon: process.env.FAVICON_PATH,
     twitter: process.env.TWITTER_URL,
     telegram: process.env.TELEGRAM_URL,
-    channel: process.env.CHANNEL_URL
+    channel: process.env.CHANNEL_URL,
+    neurochat: process.env.NEUROCHAT_URL,
+    photo_generations: process.env.PHOTO_GENERATIONS_URL
   });
 });
 
@@ -28,14 +32,18 @@ app.get('/', (req, res) => {
 app.get('/start', (req, res) => {
   res.render('start', {
     title: process.env.SITE_TITLE,
-    description: process.env.SITE_DESCRIPTION,
-    keywords: process.env.SITE_KEYWORDS,
+    description: process.env.META_DESCRIPTION,
+    keywords: process.env.META_KEYWORDS,
     url: process.env.SITE_URL,
-    image: process.env.SITE_IMAGE,
+    image: process.env.OG_IMAGE,
+    twitter_image: process.env.TWITTER_IMAGE,
+    favicon: process.env.FAVICON_PATH,
     twitter: process.env.TWITTER_URL,
     telegram: process.env.TELEGRAM_URL,
-    channel: process.env.CHANNEL_URL
-  });
+    channel: process.env.CHANNEL_URL,
+    neurochat: process.env.NEUROCHAT_URL,
+    photo_generations: process.env.PHOTO_GENERATIONS_URL
+  });  
 });
 
 // Запуск сервера

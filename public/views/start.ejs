@@ -6,7 +6,7 @@
   </title>
 
   <!-- Favicon -->
-  <link rel="icon" href="/assets/models/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="<%= favicon %>" type="image/x-icon">
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="<%= description %>">
@@ -47,12 +47,12 @@
   <div class="centered-text">TRY THE POWER OF AI</div>
   <div class="button-container">
     <div class="block">
-      <button class="button" onclick="window.location.href='https://example.com/neurochat'">
+      <button class="button" onclick="window.location.href='<%= TWITTER_URL %>'">
         <i class="fab fa-telegram-plane" style="font-size: 20px;"></i> NEUROCHAT
       </button>
     </div>
     <div class="block">
-      <button class="button" onclick="window.location.href='https://example.com/photo-generations'"
+      <button class="button" onclick="window.location.href='<%= PHOTO_GENERATIONS_URL %>'"
         style="margin-block-end: 40px;">
         <i class="fab fa-telegram-plane" style="font-size: 20px;" aria-hidden="true"></i> PHOTO GENERATIONS
       </button>
@@ -62,9 +62,9 @@
 
 <!-- Footer Links -->
 <div class="footer">
-  <a href="https://twitter.com" target="_blank" class="footer-link">Twitter</a>
-  <a href="https://telegram.org" target="_blank" class="footer-link">Telegram</a>
-  <a href="https://example.com/channel" target="_blank" class="footer-link">Channel</a>
+  <a href="<%= TWITTER_URL %>" target="_blank" class="footer-link" title="Follow us on Twitter">Twitter</a>
+  <a href="<%= TELEGRAM_URL %>" target="_blank" class="footer-link" title="Follow us on Telegram">Telegram</a>
+  <a href="<%= CHANNEL_URL %>" target="_blank" class="footer-link" title="Follow us on Channel">Channel</a>
 </div>
 
 <!-- Three.js Scripts and Scene -->

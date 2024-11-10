@@ -9,7 +9,7 @@
   </title>
 
   <!-- Favicon -->
-  <link rel="icon" href="/assets/models/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="<%= favicon %>" type="image/x-icon">
 
   <!-- SEO Meta Tags -->
   <meta name="description" content="<%= description %>">
@@ -34,7 +34,6 @@
 
   <!-- Font and Icon -->
   <link href="https://fonts.googleapis.com/css2?family=Jaldi:wght@700&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/c37f173b57.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" type="text/css" href="/assets/css/style2.css?v=5">
 </head>
 
@@ -47,10 +46,9 @@
 
   <!-- Footer Links -->
   <div class="footer">
-    <!-- Descriptive links for better accessibility and SEO -->
-    <a href="https://twitter.com/NeuroChatAI" target="_blank" class="footer-link">Twitter</a>
-    <a href="https://telegram.org/NeuroChatAI" target="_blank" class="footer-link">Telegram</a>
-    <a href="https://example.com/channel" target="_blank" class="footer-link">Channel</a>
+    <a href="<%= TWITTER_URL %>" target="_blank" class="footer-link" title="Follow us on Twitter">Twitter</a>
+    <a href="<%= TELEGRAM_URL %>" target="_blank" class="footer-link" title="Follow us on Telegram">Telegram</a>
+    <a href="<%= CHANNEL_URL %>" target="_blank" class="footer-link" title="Follow us on Channel">Channel</a>
   </div>
 </body>
 
