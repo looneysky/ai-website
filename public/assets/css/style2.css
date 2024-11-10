@@ -55,6 +55,7 @@ body {
 
 .button {
     background-color: #fff;
+    margin-top: 15px;
     color: #000;
     border: none;
     padding: 12px 50px;
@@ -111,10 +112,6 @@ body {
     .button {
         font-size: 18px;
         padding: 10px 30px;
-    }
-
-    .button-container {
-        margin-top: 25px;
     }
 
     .footer {
