@@ -103,8 +103,8 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .centered-text {
-        font-size: 35px;
-        max-width: calc(100% - 40px);
+        font-size: 32px;
+        max-width: calc(100% - 20px);
         /* 20px margin from both sides on mobile */
     }
 
