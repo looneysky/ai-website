@@ -159,8 +159,6 @@
 .footer {
   position: absolute;
   bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   gap: 20px; /* Space between links */
   z-index: 10;
